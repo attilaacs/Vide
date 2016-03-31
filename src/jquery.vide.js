@@ -34,7 +34,8 @@
     posterType: 'detect',
     resizing: true,
     bgColor: 'transparent',
-    className: ''
+    className: '',
+    fadeIn: false
   };
 
   /**
@@ -231,6 +232,7 @@
     var posterType = settings.posterType;
     var $video;
     var $wrapper;
+    var fadeIn = settings.fadeIn;
 
     // Set styles of a video wrapper
     $wrapper = vide.$wrapper = $('<div>')
@@ -317,7 +319,8 @@
           muted: settings.muted,
           defaultMuted: settings.muted,
           playbackRate: settings.playbackRate,
-          defaultPlaybackRate: settings.playbackRate
+          defaultPlaybackRate: settings.playbackRate,
+          fadeIn: settings.fadeIn
         });
     } catch (e) {
       throw new Error(NOT_IMPLEMENTED_MSG);
@@ -347,11 +350,22 @@
 
     // Make it visible, when it's already playing
     .one('playing.' + PLUGIN_NAME, function() {
-      $video.css({
-        visibility: 'visible',
-        opacity: 1
-      });
-      $wrapper.css('background-image', 'none');
+	  if (settings.fadeIn !== false && $.isNumeric(settings.fadeIn)) {
+		$video.hide();
+      	$video.css({
+      	  visibility: 'visible',
+      	  opacity: 1
+      	});
+      	$video.fadeIn(settings.fadeIn, function() {
+	  	    $wrapper.css('background-image', 'none'); 
+	  	});
+	  } else {
+      	$video.css({
+      	  visibility: 'visible',
+      	  opacity: 1
+      	});
+      	$wrapper.css('background-image', 'none');
+	  }
     });
 
     // Resize event is available only for 'window'
