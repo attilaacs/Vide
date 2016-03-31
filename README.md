@@ -33,7 +33,7 @@ path/
 Add `data-vide-bg` attribute with a path to the video and poster without extension, video and poster must have the same name. Add `data-vide-options` to pass vide options, if you need it. By default video is muted, looped and starts automatically.
 ```html
 <div style="width: 1000px; height: 500px;"
-  data-vide-bg="path/to/video" data-vide-options="loop: false, muted: false, position: 0% 0%">
+  data-vide-bg="path/to/video" data-vide-options="loop: false, muted: false, position: 0% 0%, fadeIn: 1000">
 </div>
 ```
 
@@ -41,7 +41,7 @@ Also you can set extended path:
 ```html
 <div style="width: 1000px; height: 500px;"
   data-vide-bg="mp4: path/to/video1, webm: path/to/video2, ogv: path/to/video3, poster: path/to/poster"
-  data-vide-options="posterType: jpg, loop: false, muted: false, position: 0% 0%">
+  data-vide-options="posterType: jpg, loop: false, muted: false, position: 0% 0%, fadeIn: 1000">
 </div>
 ```
 
@@ -79,7 +79,8 @@ Below is a complete list of options and matching default values:
   posterType: 'detect', // Poster image type. "detect" — auto-detection; "none" — no poster; "jpg", "png", "gif",... - extensions.
   resizing: true, // Auto-resizing, read: https://github.com/VodkaBears/Vide#resizing
   bgColor: 'transparent', // Allow custom background-color for Vide div,
-  className: '' // Add custom CSS class to Vide div
+  className: '', // Add custom CSS class to Vide div
+  fadeIn: 1000 //Add video fadeIn when loaded. Number in milliseconds (required)
 }
 ```
 
